@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>Portfolio</h3>
+
+<form id="holding-form">
+
+    <input
+        type="text"
+        id="ticker"
+        placeholder="Ticker (AAPL)"
+        required
+    >
+
+    <input
+        type="number"
+        id="quantity"
+        placeholder="Quantity"
+        required
+    >
+
+    <button type="submit">
+        Add Stock
+    </button>
+
+</form>
+
+<br>
+
+<table border="1" cellpadding="10">
+
+   <tr>
+    <th>Ticker</th>
+    <th>Quantity</th>
+    <th>Price</th>
+    <th>Value</th>
+    <th>Action</th>
+</tr>
+
+    {% for h in holdings %}
+
+    <tr>
+    <td>{{ h.ticker }}</td>
+    <td>{{ h.quantity }}</td>
+    <td>${{ h.price }}</td>
+    <td>${{ h.value }}</td>
+
+<td>
+    <a href="/delete/{{ h.ticker }}">
+        Delete
+    </a>
+</td>
+</tr>
+    {% endfor %}
+
+</table>
+
+<p>Total Value: {{ total_value }}</p>
+
+<script>
+
+document.getElementById("holding-form")
+.addEventListener("submit", async function(e){
+
+    e.preventDefault();
+
+    const ticker =
+        document.getElementById("ticker")
+        .value
+        .toUpperCase();
+
+    const quantity =
+        document.getElementById("quantity")
+        .value;
+
+    const response = await fetch(
+        "/api/portfolio",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                ticker: ticker,
+                quantity: quantity
+            })
+        }
+    );
+
+    const data = await response.json();
+
+    alert(data.message);
+
+    location.reload();
+
+});
+
+</script>
+
+{% endblock %}

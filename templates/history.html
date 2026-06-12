@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>Analysis History</h3>
+
+<table border="1" cellpadding="10">
+
+    <tr>
+        <th>Ticker</th>
+        <th>Analysis</th>
+        <th>Time</th>
+    </tr>
+
+    {% for item in items %}
+
+    <tr>
+        <td>{{ item.ticker }}</td>
+        <td>{{ item.analysis }}</td>
+        <td>{{ item.created_at }}</td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

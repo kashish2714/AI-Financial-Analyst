@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>Stock Dashboard</h3>
+
+<form method="POST">
+    <input type="text" name="ticker" placeholder="Enter ticker (AAPL)" required>
+    <button type="submit">Analyze</button>
+</form>
+
+{% if stock %}
+
+<hr>
+
+<h4>Stock Info</h4>
+
+<p><strong>Company:</strong> {{ stock.company }}</p>
+<p><strong>Ticker:</strong> {{ stock.ticker }}</p>
+<p><strong>Price:</strong> {{ stock.price }}</p>
+<p><strong>P/E:</strong> {{ stock.pe_ratio }}</p>
+<p><strong>Beta:</strong> {{ stock.beta }}</p>
+<p><strong>Sector:</strong> {{ stock.sector }}</p>
+
+{% endif %}
+
+{% if ml_result %}
+
+<hr>
+
+<h4>ML Prediction</h4>
+
+<p><strong>Direction:</strong> {{ ml_result.prediction }}</p>
+<p><strong>Confidence:</strong> {{ ml_result.confidence }}%</p>
+
+{% endif %}
+
+{% endblock %}
