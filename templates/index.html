@@ -2,8 +2,9 @@
 
 {% block content %}
 
-<h3>Stock Dashboard</h3>
+<h2>📊 Stock AI Dashboard</h2>
 
+<!-- INPUT FORM -->
 <form method="POST">
     <input type="text" name="ticker" placeholder="Enter ticker (AAPL)" required>
     <button type="submit">Analyze</button>
@@ -13,12 +14,12 @@
 
 <hr>
 
-<h4>Stock Info</h4>
+<h3>📈 Stock Info</h3>
 
 <p><strong>Company:</strong> {{ stock.company }}</p>
 <p><strong>Ticker:</strong> {{ stock.ticker }}</p>
 <p><strong>Price:</strong> {{ stock.price }}</p>
-<p><strong>P/E:</strong> {{ stock.pe_ratio }}</p>
+<p><strong>P/E Ratio:</strong> {{ stock.pe_ratio }}</p>
 <p><strong>Beta:</strong> {{ stock.beta }}</p>
 <p><strong>Sector:</strong> {{ stock.sector }}</p>
 
@@ -28,10 +29,18 @@
 
 <hr>
 
-<h4>ML Prediction</h4>
+<h3>🧠 ML Prediction</h3>
 
 <p><strong>Direction:</strong> {{ ml_result.prediction }}</p>
 <p><strong>Confidence:</strong> {{ ml_result.confidence }}%</p>
+
+<hr>
+
+<h3>🤖 AI Analyst Report</h3>
+
+<p style="white-space: pre-line;">
+    {{ ml_result.ai_report }}
+</p>
 
 {% endif %}
 

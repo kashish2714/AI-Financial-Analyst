@@ -1,18 +1,23 @@
-# AI Financial Analyst Web App
+# 📊 AI Financial Analyst Web App
 
-## 📊 Overview
-This project is a full-stack AI-powered financial analysis web application built using Flask. It fetches real-time stock data, manages a user portfolio, and uses Machine Learning to predict short-term stock movement.
+## 🚀 Overview
+An AI-powered financial analysis web application that combines **Machine Learning, Technical Indicators, and LLM-based insights** to predict short-term stock movement and generate analyst-style reports.
 
 ---
 
-## 🚀 Features
+## ✨ Features
 
-- Real-time stock data using Yahoo Finance API (yfinance)
-- Stock analysis dashboard (price, PE ratio, beta, sector)
-- Portfolio management system (add/delete stocks)
-- SQLite database integration using SQLAlchemy
-- ML-based stock direction prediction (UP / DOWN)
-- Analysis history tracking
+- 📈 Real-time stock data using Yahoo Finance (yfinance)
+- 🤖 Machine Learning-based stock prediction (UP / DOWN)
+- 🧠 AI Analyst Report using LLM (Groq API)
+- 📊 Technical Indicators:
+  - RSI (Relative Strength Index)
+  - MACD (Moving Average Convergence Divergence)
+  - Moving Averages (MA5, MA10)
+  - Volatility analysis
+- 💼 Portfolio management system
+- 🗂 SQLite database (SQLAlchemy)
+- 📜 Analysis history tracking
 
 ---
 
@@ -20,15 +25,41 @@ This project is a full-stack AI-powered financial analysis web application built
 
 - Model: Random Forest Classifier
 - Type: Supervised Learning (Classification)
-- Features used:
-  - Daily return
-  - 5-day moving average
-  - 10-day moving average
-- Output:
-  - Stock movement prediction (UP / DOWN)
-  - Confidence score
 
-Note: This model is for educational purposes and not for financial trading.
+### 📊 Features Used:
+- Daily return
+- Moving averages (5-day, 10-day)
+- RSI
+- MACD
+- MACD Signal
+- Volatility
+
+### 🎯 Output:
+- Stock direction prediction (UP / DOWN)
+- Confidence score
+
+---
+
+## 📊 Model Performance
+
+- Train Accuracy: ~0.85
+- Test Accuracy: ~0.47–0.60
+- F1 Score: ~0.55–0.58
+
+> Note: Stock markets are highly stochastic; these results are realistic for short-term prediction models.
+
+---
+
+## 🧠 AI Component
+
+The system uses an LLM (Groq API) to generate:
+
+- Market explanation
+- Reason behind prediction
+- Risk analysis
+- Analyst-style report
+
+This makes the system interpretable, not just predictive.
 
 ---
 
@@ -36,56 +67,47 @@ Note: This model is for educational purposes and not for financial trading.
 
 - Python
 - Flask
-- SQLAlchemy
 - Scikit-learn
 - Pandas
 - NumPy
 - yfinance
+- ta (technical indicators)
+- SQLAlchemy
+- Groq LLM API
 - HTML / Jinja2
 
 ---
 
 ## 📁 Project Structure
-
 AI-Financial-Analyst/
 │
 ├── app.py
-├── ml_model.py
-├── utils.py
-├── models.py
-├── extensions.py
+├── ml/
+│ ├── train_model.py
+│ ├── features.py
+│
+├── models/
+│ └── model.pkl
 │
 ├── templates/
-│   ├── base.html
-│   ├── index.html
-│   ├── portfolio.html
-│   └── history.html
+│ ├── base.html
+│ ├── index.html
+│ ├── portfolio.html
+│ └── history.html
 │
+├── extensions.py
 ├── requirements.txt
 └── README.md
+
 
 ---
 
 ## ▶️ How to Run
 
+```bash
 pip install -r requirements.txt
 python app.py
 
 Then open:
+
 http://127.0.0.1:5000
-
----
-
-## 🎯 What This Project Demonstrates
-
-- End-to-end ML pipeline
-- Feature engineering from financial data
-- Integration of ML with web development
-- Database design and management
-- API integration (Yahoo Finance)
-- Full-stack project architecture
-
----
-
-## ⚠️ Disclaimer
-This project is for educational purposes only and does not provide financial advice or real trading recommendations.

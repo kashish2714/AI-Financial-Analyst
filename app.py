@@ -1,10 +1,12 @@
 from flask import Flask, render_template, request, redirect
-from utils import get_stock_data
 from extensions import db
 from models import Holding, AnalysisHistory
 
-# ML
-from ml_model import train_model, predict_next
+from utils import get_stock_data
+from ml.train_model import train_model
+from ml.predict import predict_next
+
+from llm import generate_ai_insight
 
 app = Flask(__name__)
 
@@ -28,25 +30,37 @@ def home():
         if ticker:
 
             try:
-                # STOCK DATA
+                ticker = ticker.upper()
+
+                # 1. GET STOCK DATA
                 stock = get_stock_data(ticker)
 
-                # SAVE HISTORY
+                # 2. SAVE HISTORY
                 history = AnalysisHistory(
-                    ticker=ticker.upper(),
+                    ticker=ticker,
                     analysis=f"{stock['company']} | Price: {stock['price']}"
                 )
-
                 db.session.add(history)
                 db.session.commit()
 
-                # ML MODEL
+                # 3. ML PREDICTION
                 model, data = train_model(ticker)
-                prediction, confidence = predict_next(model, data)
+                prediction, confidence = predict_next(data)
+
+                prediction_text = "UP" if prediction == 1 else "DOWN"
+
+                # 4. AI INSIGHT (LLM)
+                ai_report = generate_ai_insight(
+                    ticker,
+                    prediction_text,
+                    round(confidence * 100, 2),
+                    "MA5, MA10, Return based signals"
+                )
 
                 ml_result = {
-                    "prediction": "UP" if prediction == 1 else "DOWN",
-                    "confidence": round(confidence * 100, 2)
+                    "prediction": prediction_text,
+                    "confidence": round(confidence * 100, 2),
+                    "ai_report": ai_report
                 }
 
             except Exception as e:
@@ -76,7 +90,6 @@ def portfolio():
         price = stock["price"]
 
         value = price * h.quantity if isinstance(price, (int, float)) else 0
-
         total += value
 
         data.append({
