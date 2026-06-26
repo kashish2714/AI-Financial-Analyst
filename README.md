@@ -1,113 +1,149 @@
-# 📊 AI Financial Analyst Web App
+# AI Financial Analyst Web Application
 
-## 🚀 Overview
-An AI-powered financial analysis web application that combines **Machine Learning, Technical Indicators, and LLM-based insights** to predict short-term stock movement and generate analyst-style reports.
+## Overview
 
----
-
-## ✨ Features
-
-- 📈 Real-time stock data using Yahoo Finance (yfinance)
-- 🤖 Machine Learning-based stock prediction (UP / DOWN)
-- 🧠 AI Analyst Report using LLM (Groq API)
-- 📊 Technical Indicators:
-  - RSI (Relative Strength Index)
-  - MACD (Moving Average Convergence Divergence)
-  - Moving Averages (MA5, MA10)
-  - Volatility analysis
-- 💼 Portfolio management system
-- 🗂 SQLite database (SQLAlchemy)
-- 📜 Analysis history tracking
+An AI-powered financial analysis web application that combines machine learning, technical indicators, and LLM-generated insights to predict short-term stock price movement and generate analyst-style financial reports.
 
 ---
 
-## 🧠 Machine Learning Model
+## Features
 
-- Model: Random Forest Classifier
-- Type: Supervised Learning (Classification)
+* Fetch real-time stock market data using Yahoo Finance (`yfinance`)
+* Predict next-day stock movement using a Random Forest classifier
+* Generate AI-powered financial insights using the Groq LLM
+* Compute technical indicators including:
 
-### 📊 Features Used:
-- Daily return
-- Moving averages (5-day, 10-day)
-- RSI
-- MACD
-- MACD Signal
-- Volatility
-
-### 🎯 Output:
-- Stock direction prediction (UP / DOWN)
-- Confidence score
+  * Relative Strength Index (RSI)
+  * Moving Average Convergence Divergence (MACD)
+  * 5-day and 10-day Moving Averages
+  * Volatility
+* Portfolio management system
+* Analysis history tracking
+* SQLite database integration using SQLAlchemy
 
 ---
 
-## 📊 Model Performance
+## Machine Learning Model
 
-- Train Accuracy: ~0.85
-- Test Accuracy: ~0.47–0.60
-- F1 Score: ~0.55–0.58
+**Model:** Random Forest Classifier
 
-> Note: Stock markets are highly stochastic; these results are realistic for short-term prediction models.
+**Learning Type:** Supervised Classification
 
----
+### Features Used
 
-## 🧠 AI Component
+* Daily Return
+* 5-Day Moving Average
+* 10-Day Moving Average
+* RSI
+* MACD
+* MACD Signal
+* Volatility
 
-The system uses an LLM (Groq API) to generate:
+### Prediction Output
 
-- Market explanation
-- Reason behind prediction
-- Risk analysis
-- Analyst-style report
-
-This makes the system interpretable, not just predictive.
-
----
-
-## 🛠 Tech Stack
-
-- Python
-- Flask
-- Scikit-learn
-- Pandas
-- NumPy
-- yfinance
-- ta (technical indicators)
-- SQLAlchemy
-- Groq LLM API
-- HTML / Jinja2
+* Next-day stock movement (UP / DOWN)
+* Prediction confidence score
 
 ---
 
-## 📁 Project Structure
+## Model Performance
+
+| Metric            | Value      |
+| ----------------- | ---------- |
+| Training Accuracy | ~0.85      |
+| Test Accuracy     | ~0.47–0.60 |
+| F1 Score          | ~0.55–0.58 |
+
+> Stock markets are highly stochastic; these results are consistent with realistic short-term price prediction tasks.
+
+---
+
+## AI Component
+
+The application uses the Groq LLM to generate:
+
+* Market interpretation
+* Explanation of model predictions
+* Risk analysis
+* Analyst-style financial summaries
+
+This improves the interpretability of machine learning predictions by providing natural language explanations.
+
+---
+
+## Tech Stack
+
+* Python
+* Flask
+* Scikit-learn
+* Pandas
+* NumPy
+* yfinance
+* ta
+* SQLAlchemy
+* Groq API
+* HTML
+* Jinja2
+
+---
+
+## Project Structure
+
+```text
 AI-Financial-Analyst/
 │
 ├── app.py
 ├── ml/
-│ ├── train_model.py
-│ ├── features.py
-│
+│   ├── train_model.py
+│   └── features.py
 ├── models/
-│ └── model.pkl
-│
+│   └── model.pkl
 ├── templates/
-│ ├── base.html
-│ ├── index.html
-│ ├── portfolio.html
-│ └── history.html
-│
+│   ├── base.html
+│   ├── index.html
+│   ├── portfolio.html
+│   └── history.html
 ├── extensions.py
 ├── requirements.txt
 └── README.md
-
+```
 
 ---
 
-## ▶️ How to Run
+## Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/kashish2714/AI-Financial-Analyst.git
+```
+
+Navigate to the project directory
+
+```bash
+cd AI-Financial-Analyst
+```
+
+Install the required packages
 
 ```bash
 pip install -r requirements.txt
+```
+
+Create a `.env` file and add your Groq API key
+
+```env
+GROQ_API_KEY=your_groq_api_key_here
+```
+
+Run the application
+
+```bash
 python app.py
+```
 
-Then open:
+Open the application in your browser:
 
+```text
 http://127.0.0.1:5000
+```
